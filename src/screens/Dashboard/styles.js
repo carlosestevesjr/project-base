@@ -6,12 +6,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    backgroundColor: colors.black,
   },
   contentContainer: {
     flex: 1,
     paddingHorizontal: wpd(10),
     
+  },
+  modalBtn: {
+    padding: metrics.basePadding,
+    marginVertical: metrics.baseMargin / 4,
   },
 });
 

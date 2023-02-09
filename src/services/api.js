@@ -6,7 +6,7 @@ async function getToken() {
   return token;
 }
 const api = axios.create({
-  baseURL: 'https://igpriceapi.iguacumaquinas.com.br/v1',
+  baseURL: 'https://pokeapi.co/api/v2',
   // headers: {
   //   'Accept-Language': 'pt',
   // },

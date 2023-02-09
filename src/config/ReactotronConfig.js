@@ -24,7 +24,7 @@ const yeOldeConsoleLog = console.log;
 console.log = (...args) => {
   yeOldeConsoleLog(...args);
   Reactotron.display({
-    name: 'CONSOLE.LOG',
+    name: 'TRON',
     value: args,
     preview: args.length > 0 && typeof args[0] === 'string' ? args[0] : null,
   });

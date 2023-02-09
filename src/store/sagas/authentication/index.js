@@ -9,18 +9,13 @@ import {
 
 
 function* login({ payload }) {
+  
   try {
     const {
       data,
-      data: { access_token: token, profile },
-    } = yield call(api.post, '/employees/auth', payload);
+    } = yield call(api.get, 'pokemon', payload);
 
-    if (profile?.is_active) {
-      yield call(saveToken, { token });
-      yield put(AuthActions.loginRequestSuccess(data));
-    } else {
-      yield put(AuthActions.loginRequestFail('Usuário inativo!'));
-    }
+    yield put(AuthActions.loginRequestSuccess(data));
   } catch (error) {
     yield put(AuthActions.loginRequestFail());
   }

@@ -19,7 +19,7 @@ persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   blacklist: ['authReducer'], //these reduce will not persist data
-  whitelist: ['homeReducer'], //these reduce will persist data
+  whitelist: ['authentication'], //these reduce will persist data
 };
 
 if (!__DEV__) {
