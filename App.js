@@ -1,10 +1,10 @@
 /* eslint-disable react/style-prop-object */
 import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, Button } from 'react-native';
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store/index';
+import { store, persistor } from './src/store';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -54,7 +54,7 @@ export default function App() {
       <StatusBar style="dark" />
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <MyStack></MyStack>
+          <MyStack></MyStack>
         </PersistGate>
       </Provider>
    </>
