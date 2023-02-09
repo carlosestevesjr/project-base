@@ -1,63 +1,77 @@
-/* eslint-disable react/style-prop-object */
 import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store/index';
+import { store, persistor } from './src/store';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+import TradeGothic from './src/assets/fonts/TradeGothicLT.ttf';
+import TradeGothicBold from './src/assets/fonts/TradeGothicLT-Bold.ttf';
 
-const Stack = createNativeStackNavigator();
+//Navigation
+import { NavigationContainer } from '@react-navigation/native';
+import Router from './src/navigation/Router';
 
-const HomeScreen = ({navigation}) => {
-    const teste = useSelector((state) => state);
-    console.log(teste)
-    return (
-      <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigation.navigate('Profile', {name: 'Jane'})
-        }
-      />
-    );
-};
-const ProfileScreen = ({navigation, route}) => {
-    return <Text>This is {route.params.name}'s profile</Text>;
-};
-
-const MyStack = () => {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{title: 'Welcome'}}
-          />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
 
 export default function App() {
 
+  const [ appIsReady, setAppIsReady ] = useState(false);
+
   useEffect(() => {
-    console.log('teste')
-  },
-  []);
-//   const teste = useSelector((state) => state);
+    async function loadResourcesAndDataAsync() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+
+        await Font.loadAsync({
+          ...Ionicons.font,
+          TradeGothic,
+          TradeGothicBold,
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    loadResourcesAndDataAsync();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-   <>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar style="dark" />
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <MyStack></MyStack>
+          <NavigationContainer>
+            <Router />
+          </NavigationContainer>
         </PersistGate>
       </Provider>
-   </>
-    
+    </View>
+
   );
 }
