@@ -2,9 +2,10 @@ import Reactotron, { overlay } from 'reactotron-react-native';
 import sagaPlugin from 'reactotron-redux-saga';
 import { reactotronRedux } from 'reactotron-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLocalIP } from '../helpers';
 
 Reactotron
-    .configure({ name: 'app_name', host: '192.168.15.8' })
+    .configure({ name: 'app_base', host: getLocalIP() })
     .setAsyncStorageHandler(AsyncStorage)
     .useReactNative({
         networking: {
