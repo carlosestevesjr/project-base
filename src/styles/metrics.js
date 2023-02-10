@@ -3,7 +3,7 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 export default {
-  basePadding: 10,
+  basePadding: 20,
   baseMargin: 30,
   paddingAbsolute: 20,
   marginAbsolute: 20,

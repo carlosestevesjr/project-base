@@ -11,10 +11,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: metrics.baseMargin / 2,
     alignSelf: 'stretch',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   buttonText: {
     color: colors.black,
+    fontFamily: 'TradeGothicBold',
+    fontSize: 18,
+  },
+  buttonContainerGradient: {
+    borderColor: colors.primary,
+    borderRadius: metrics.baseRadius * 10,
+    
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: metrics.baseMargin / 2,
+    alignSelf: 'stretch',
+    flexDirection: 'row'
+  },
+  buttonTextGradient: {
+    color: colors.white,
     fontFamily: 'TradeGothicBold',
     fontSize: 18,
   },

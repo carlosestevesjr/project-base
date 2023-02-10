@@ -24,7 +24,18 @@ const Dashboard = ({ navigation: { openDrawer, navigate } }) => {
           </View>
           <Button
             title="TESTE"
+            linearGradient={false}
             style={styles.modalBtn}
+            onPress={() => {
+              dispatch(AuthActions.loginRequest({testando:'algo'}));
+            }}
+          />
+          <Button
+            title="TESTE"
+            loading={false}
+            linearGradient={true}
+            gradientColors={['#92A3FD', '#9DCEFF']}
+          
             onPress={() => {
               dispatch(AuthActions.loginRequest({testando:'algo'}));
             }}
